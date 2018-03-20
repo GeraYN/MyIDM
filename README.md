@@ -39,6 +39,7 @@ $ cd /tmp.
 ```
 
 После этого используйте PHP для захвата установщика.
+```bash
 $ php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 ```
 Чтобы Composer был доступен для всей системы, установим в каталог /usr/local/bin.
