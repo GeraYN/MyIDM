@@ -1,0 +1,23 @@
+
+https://sitkodenis.ru/chto-za-oshibka-configure-authmanager-component-database-executing-migration-v-yii2/
+
+Что за ошибка You should configure «authManager» component to use database before executing this migration в Yii2?
+PHP Yii2  16.08.2017 SoladieM  0 Комментариев  1394 просмотра
+При выполнении миграции для RBAC (yii migrate —migrationPath=@yii/rbac/migrations/) может возникнуть ошибка You should configure «authManager» component to use database before executing this migration.
+
+Данная ошибка связана с тем, что не правильно настроена конфигурация фреймворка. Причем многие ошибочно пытаются настроить конфигурационный файл в директории config с именем web.php. За консольное приложение отвечает конфигурационный файл console.php (для basic шаблона). Если вы используете advanced шаблон фреймворка, то конфигурация для консоли находится в папке console.
+
+Примечание: если поместить настройки в папке common в advanced шаблоне, то миграция также должна сработать без ошибок.
+
+Теперь напишем саму настройку включения RBAC с использованием базы данных.
+
+'components' => [
+    ...
+    'authManager' => [
+        'class' => 'yii\rbac\DbManager',
+    ],
+    ...
+],
+Если все расположили правильно, то миграция успешно выполнится.
+
+Спасибо за внимание и успешной работы с framework Yii2.
